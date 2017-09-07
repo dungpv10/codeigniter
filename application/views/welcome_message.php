@@ -99,15 +99,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</h1>
 
 		<div id="body">
-			<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
-			<p>If you would like to edit this page you'll find it located at:</p>
-			<code>application/views/welcome_message.php</code>
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="2">ID</td>
+                        <td colspan="2">Phone</td>
+                        <td colspan="2">Name</td>
+                        <td colspan="2">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($orders as $order) : ?>
+                        <tr>
+                            <td colspan="2"><?=$order->id?></td>
+                            <td colspan="2"><?=$order->phone?></td>
+                            <td colspan="2"><?=$order->name?></td>
+                            <td colspan="2">
+                                <form action="/welcome/delete/<?=$order->id?>" method="POST">
+                                    <button type="submit">Delete</button>
+                                </form>
+                                <a href=""> Edit </a>
+                            </td>
+                        </tr>
 
-			<p>The corresponding controller for this page is found at:</p>
-			<code>application/controllers/Welcome.php</code>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-			<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+            <?=$this->pagination->create_links()?>
 		</div>
 
 		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
